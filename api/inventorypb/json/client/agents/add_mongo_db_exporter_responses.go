@@ -552,11 +552,12 @@ type AddMongoDBExporterOKBodyMongodbExporter struct {
 	//
 	//  - STARTING: Agent is starting.
 	//  - RUNNING: Agent is running.
-	//  - WAITING: Agent encountered error and will be restarted automatically soon.
+	//  - WAITING: Agent will be restarted automatically soon.
 	//  - STOPPING: Agent is stopping.
 	//  - DONE: Agent finished.
 	//  - UNKNOWN: Agent is not connected, we don't know anything about it's state.
-	// Enum: [AGENT_STATUS_INVALID STARTING RUNNING WAITING STOPPING DONE UNKNOWN]
+	//  - INITILIZATION_ERROR: Agent encountered error when starting.
+	// Enum: [AGENT_STATUS_INVALID STARTING RUNNING WAITING STOPPING DONE UNKNOWN INITILIZATION_ERROR]
 	Status *string `json:"status,omitempty"`
 
 	// Listen port for scraping metrics.
@@ -605,7 +606,7 @@ var addMongoDbExporterOkBodyMongodbExporterTypeStatusPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["AGENT_STATUS_INVALID","STARTING","RUNNING","WAITING","STOPPING","DONE","UNKNOWN"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["AGENT_STATUS_INVALID","STARTING","RUNNING","WAITING","STOPPING","DONE","UNKNOWN","INITILIZATION_ERROR"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -635,6 +636,9 @@ const (
 
 	// AddMongoDBExporterOKBodyMongodbExporterStatusUNKNOWN captures enum value "UNKNOWN"
 	AddMongoDBExporterOKBodyMongodbExporterStatusUNKNOWN string = "UNKNOWN"
+
+	// AddMongoDBExporterOKBodyMongodbExporterStatusINITILIZATIONERROR captures enum value "INITILIZATION_ERROR"
+	AddMongoDBExporterOKBodyMongodbExporterStatusINITILIZATIONERROR string = "INITILIZATION_ERROR"
 )
 
 // prop value enum
